@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>火箭可视化</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h1>火箭着陆PID模拟</h1>
+        <h2>Author:sucr, Last Edit Time : 2024年12月28日</h2>
+    </div>
+    <div class="container">
+        <div class="control-panel">
+            <h3>模拟参数</h3>
+            <div class="input-group">
+                <label for="kp">比例系数 (kp):</label>
+                <input type="number" id="kp" value="5.0" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="ki">积分系数 (ki):</label>
+                <input type="number" id="ki" value="0.9" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="kd">微分系数 (kd):</label>
+                <input type="number" id="kd" value="1.9" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="initial_height">初始高度 (m):</label>
+                <input type="number" id="initial_height" value="300" step="10">
+            </div>
+            <div class="input-group">
+                <label for="initial_velocity">初始速度 (m/s):</label>
+                <input type="number" id="initial_velocity" value="-30" step="1">
+            </div>
+            <div class="input-group">
+                <label for="target_velocity">目标速度 (m/s):</label>
+                <input type="number" id="target_velocity" value="-2" step="0.1">
+            </div>
+            <div class="input-group">
+                <label for="max_integral">最大积分限制:</label>
+                <input type="number" id="max_integral" value="50" step="1">
+            </div>
+            <div class="input-group">
+                <label for="noise_amplitude">噪声幅度:</label>
+                <input type="number" id="noise_amplitude" value="0.05" step="0.01">
+            </div>
+            <div class="input-group">
+                <label for="max_thrust">最大推力 (N):</label>
+                <input type="number" id="max_thrust" step="10" min="0">
+            </div>
+            <div class="input-group">
+                <label for="time_step">时间精度 (s):</label>
+                <input type="number" id="time_step" value="0.1" step="0.01" min="0.01">
+            </div>
+            <div class="input-group">
+                <label for="sim_time">模拟总时长 (s):</label>
+                <input type="number" id="sim_time" value="800" step="10" min="10">
+            </div>
+            <button id="start-simulation">开始模拟</button>
+        </div>
+        <div class="animation-panel">
+            <div id="rocket-container">
+                <img id="rocket" src="rocket_img.png" alt="火箭">
+            </div>
+            <div id="status-display"></div>
+        </div>
+        <div class="charts">
+            <canvas id="heightChart"></canvas>
+            <canvas id="velocityChart"></canvas>
+            <canvas id="thrustChart"></canvas>
+            <canvas id="accelerationChart"></canvas>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
